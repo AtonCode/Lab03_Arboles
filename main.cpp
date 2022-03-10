@@ -1,4 +1,5 @@
 // alias push="git add . && git commit -m ".gitignore" && git push"
+//alias pull="git pull"
 // alias run="g++ -std=c++11 main.cpp && ./a.out"
 
 #include<iostream>
