@@ -1,7 +1,5 @@
 //Arbol AVL.hxx
 
-#ifndef ARBOLAVL_HXX_INCLUDED
-#define ARBOLAVL_HXX_INCLUDED
 #include <queue>
 using namespace std;
 
@@ -98,7 +96,7 @@ int ArbolAVL<T>::alturaM(NodoAVL<T>* nodo)
         return 1 + der;
 }
 
-/*template <class T>
+template <class T>
 int ArbolAVL<T>::tamano(NodoAVL<T>* inicio)
 {
     int cont = 0;
@@ -109,9 +107,10 @@ int ArbolAVL<T>::tamano(NodoAVL<T>* inicio)
     else
     {
         cont++;
-        return cont + tamano(inicio->getIzquierda()) + tamano(inicio->getDerecha());
+        
     }
-}*/
+    return cont + tamano(inicio->getIzquierda()) + tamano(inicio->getDerecha());
+}
 
 template <class T>
 void ArbolAVL<T>::inOrden(NodoAVL<T>* inicio)
@@ -166,5 +165,5 @@ void ArbolAVL<T>::nivelOrden(NodoAVL<T>* inicio)
     }
 }
 
-#endif // ARBOLAVL_HXX_INCLUDED
+
 

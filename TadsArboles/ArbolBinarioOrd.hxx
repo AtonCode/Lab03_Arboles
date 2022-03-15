@@ -95,7 +95,7 @@ int ArbolBinarioOrd<T>::alturaM(NodoBinarioOrd<T>* nodo)
         return 1 + der;
 }
 
-/*template <class T>
+template <class T>
 int ArbolBinarioOrd<T>::tamano(NodoBinarioOrd<T>* inicio)
 {
     int cont = 0;
@@ -106,9 +106,9 @@ int ArbolBinarioOrd<T>::tamano(NodoBinarioOrd<T>* inicio)
     else
     {
         cont++;
-        return cont + tamano(inicio->getIzquierda()) + tamano(inicio->getDerecha());
     }
-}*/
+    return cont + tamano(inicio->getIzquierda()) + tamano(inicio->getDerecha());
+}
 
 template <class T>
 void ArbolBinarioOrd<T>::inOrden(NodoBinarioOrd<T>* inicio)

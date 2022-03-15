@@ -1,10 +1,6 @@
 //Nodo AVLhxx
-
-#ifndef NODOAVL_HXX_INCLUDED
-#define NODOAVL_HXX_INCLUDED
-
+#include "NodoAVL.h"
 #include <algorithm>
-
 
 template <class T>
 NodoAVL<T>::NodoAVL()
@@ -215,6 +211,4 @@ bool NodoAVL<T>::eliminarNodo(T _dato)
     }
 }
 
-
-#endif // NODOAVL_HXX_INCLUDED
 
