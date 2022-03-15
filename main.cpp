@@ -8,14 +8,16 @@
 #include "TadsArboles/ArbolAVL.h"
 using namespace std;
 
-void arbolBinario(ArbolBinario<int> ArbolBinario);
+void arbolBinario(ArbolBinario<int> arbolBinario);
 void arbolOrdenado(ArbolBinarioOrd<int> arbolBinarioOrdenado);
 void arbolAVL(ArbolAVL<int> arbolAVL);
 
 int main(){
 
-  ArbolBinario<int> ArbolBinario(33);
-  arbolBinario(ArbolBinario);
+  system("clear");
+  
+  ArbolBinario<int> arbolBinarioo(1);
+  arbolBinario(arbolBinarioo);
   cout << endl;
 
   ArbolBinarioOrd<int> arbolBinarioOrdenado(12);
@@ -28,13 +30,41 @@ int main(){
     return 0;
 }
 
-void arbolBinario(ArbolBinario<int> ArbolBinario){
+void arbolBinario(ArbolBinario<int> arbolBinario){
 
+  if(arbolBinario.insertar(1,2)){
+      cout << "Se inserto el nodo correctamente" << endl;
+    }
+    else{
+      cout << "No se inserto el nodo" << endl;
+    }
+    if(arbolBinario.insertar(2,3)){
+      cout << "Se inserto el nodo correctamente" << endl;
+    }
+    else{
+      cout << "No se inserto el nodo" << endl;
+    }
+        
+    cout << "Raiz del arbolBinario: " << arbolBinario.obtenerDatoRaiz() << endl;
+    cout << "La altura del arbolBinario es: " << arbolBinario.altura() << endl;
+    cout << "El tamanio del arbolBinario es: " << arbolBinario.tamano(arbolBinario.obtenerRaiz()) << endl;
+  
+    cout << "El arbolBinario por pre-orden es el siguiente: ";
+    arbolBinario.preOrden(arbolBinario.obtenerRaiz());
+    cout << endl;
+    cout << "El arbolBinario por in-orden es el siguiente: ";
+    arbolBinario.inOrden(arbolBinario.obtenerRaiz());
+    cout << endl;
+    cout << "El arbolBinario por pos-orden es el siguiente: ";
+    arbolBinario.posOrden(arbolBinario.obtenerRaiz());
+    cout << endl;
+    cout << "El arbolBinario por nivel-orden es el siguiente: ";
+    arbolBinario.nivelOrden(arbolBinario.obtenerRaiz());
+    cout << endl;
 }
 
 void arbolOrdenado( ArbolBinarioOrd<int> arbolBinarioOrdenado){
-  system("clear");
-
+  
     if(arbolBinarioOrdenado.insertar(7)){
       cout << "Se inserto el nodo correctamente" << endl;
     }
