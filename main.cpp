@@ -8,16 +8,32 @@
 #include "TadsArboles/ArbolAVL.h"
 using namespace std;
 
-void arbolBinario(ArbolBinario<int> arbolBinario);
+void creadorArbolBinario(ArbolBinario<int> arbolBinario, int padre, int hijo);
 void arbolOrdenado(ArbolBinarioOrd<int> arbolBinarioOrdenado);
 void arbolAVL(ArbolAVL<int> arbolAVL);
+
+/**
+ 1.	Cree un Programa que convierta 5 árboles binarios básicos en arboles AVL 
+    (El programa tiene que CONVERTIR el árbol, no balancear un árbol)
+
+ */
 
 int main(){
 
   system("clear");
+
+  ArbolBinario<int> arbolBinarioUNO(1);
+  ArbolBinario<int> arbolBinarioDOS(6);
+  ArbolBinario<int> arbolBinarioTRES(10);
+  ArbolBinario<int> arbolBinarioCUATRO(15);
+  ArbolBinario<int> arbolBinarioCINCO(20);
+
   
-  ArbolBinario<int> arbolBinarioo(1);
-  arbolBinario(arbolBinarioo);
+  creadorArbolBinario(arbolBinarioUNO, 1, 2);
+  creadorArbolBinario(arbolBinarioDOS, 6, 7);
+  creadorArbolBinario(arbolBinarioTRES, 10, 11);
+  creadorArbolBinario(arbolBinarioCUATRO, 15, 16);
+  creadorArbolBinario(arbolBinarioCINCO, 20, 21);
   cout << endl;
 
   ArbolBinarioOrd<int> arbolBinarioOrdenado(12);
@@ -30,15 +46,15 @@ int main(){
     return 0;
 }
 
-void arbolBinario(ArbolBinario<int> arbolBinario){
+void creadorArbolBinario(ArbolBinario<int> arbolBinario, int padre, int hijo){
 
-  if(arbolBinario.insertar(1,2)){
+  if(arbolBinario.insertar(padre,hijo)){
       cout << "Se inserto el nodo correctamente" << endl;
     }
     else{
       cout << "No se inserto el nodo" << endl;
     }
-    if(arbolBinario.insertar(2,3)){
+    if(arbolBinario.insertar(hijo,hijo+1)){
       cout << "Se inserto el nodo correctamente" << endl;
     }
     else{
