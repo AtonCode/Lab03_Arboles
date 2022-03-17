@@ -6,6 +6,7 @@
 #include "TadsArboles/ArbolBinario.h"
 #include "TadsArboles/ArbolBinarioOrd.h"
 #include "TadsArboles/ArbolAVL.h"
+#include <iterator>
 #include <list>
 #include <stdio.h>
 using namespace std;
@@ -156,10 +157,11 @@ void arbolAVL(ArbolAVL<int> arbolAVL){
 
 ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario){
   
-  list<int> inOrdenListBInaryTree;
-
-  char * datosInChar;
+  
   if(arbolBinario.esVacio()){
+
+    list<int> inOrdenListBInaryTree;
+    char * datosInChar;
     int raiz = arbolBinario.obtenerDatoRaiz();
     int tamanoArbol = arbolBinario.tamano(arbolBinario.obtenerRaiz());
   
@@ -177,7 +179,10 @@ ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario){
     
     
     //Incertar por izquierada hasta llegar a la raiz, luego por derecha
-    arbolAVL.insertar();
+    for (auto it = inOrdenListBInaryTree.begin(); it != inOrdenListBInaryTree.end(); ++it)
+        arbolAVL.insertar(inOrdenListBInaryTree.pop_front());
+    }
+    
 
 
   }
