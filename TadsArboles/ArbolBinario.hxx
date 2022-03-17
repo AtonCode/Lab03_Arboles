@@ -144,16 +144,18 @@ int ArbolBinario<T>::tamano(NodoBinario<T>* inicio)
 
 
 template <class T>
-void ArbolBinario<T>::inOrden(NodoBinario<T>* inicio)
+list<T> ArbolBinario<T>::inOrden(NodoBinario<T>* inicio)
 {
+    list<T> list;
     if(inicio == NULL)
         return;
     else
     {
         inOrden(inicio->getIzquierda());
-        cout << inicio->getDato();
+        list.push_back(inicio->getDato());
         inOrden(inicio->getDerecha());
     }
+    return list;
 }
 
 

@@ -4,6 +4,7 @@
 #define ARBOLBINARIO_H_INCLUDED
 
 #include "NodoBinario.h"
+#include <list>
 
 
 template <class T>
@@ -24,7 +25,7 @@ public:
     int tamano(NodoBinario<T>* inicio);
     NodoBinario<T>* obtenerRaiz();
     void fijarRaiz(NodoBinario<T>* nraiz);
-    void inOrden(NodoBinario<T>* inicio);
+    list<T> inOrden(NodoBinario<T>* inicio);
     void nivelOrden(NodoBinario<T>* inicio);
     void preOrden(NodoBinario<T>* inicio);
     void posOrden(NodoBinario<T>* inicio);
