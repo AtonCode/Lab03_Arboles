@@ -182,6 +182,7 @@ ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario){
     for (auto it = inOrdenListBInaryTree.begin(); it != inOrdenListBInaryTree.end(); ++it)
         arbolAVL.insertar(inOrdenListBInaryTree.pop_front());
     }
+    return inOrdenListBInaryTree;
     
 
 
