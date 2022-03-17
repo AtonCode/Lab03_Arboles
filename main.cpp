@@ -6,11 +6,14 @@
 #include "TadsArboles/ArbolBinario.h"
 #include "TadsArboles/ArbolBinarioOrd.h"
 #include "TadsArboles/ArbolAVL.h"
+#include <list>
+#include <stdio.h>
 using namespace std;
 
 void creadorArbolBinario(ArbolBinario<int> arbolBinario, int padre, int hijo);
 void arbolOrdenado(ArbolBinarioOrd<int> arbolBinarioOrdenado);
 void arbolAVL(ArbolAVL<int> arbolAVL);
+ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario);
 
 /**
  1.	Cree un Programa que convierta 5 árboles binarios básicos en arboles AVL 
@@ -36,6 +39,10 @@ int main(){
   creadorArbolBinario(arbolBinarioCINCO, 20, 21);
   cout << endl;
 
+  //Convietiendo a arbolesAV
+  
+
+
   ArbolBinarioOrd<int> arbolBinarioOrdenado(12);
   arbolOrdenado(arbolBinarioOrdenado);
   cout << endl;
@@ -45,6 +52,7 @@ int main(){
     
     return 0;
 }
+
 
 void creadorArbolBinario(ArbolBinario<int> arbolBinario, int padre, int hijo){
 
@@ -143,5 +151,37 @@ void arbolAVL(ArbolAVL<int> arbolAVL){
     cout << "El ArbolAVL por nivel-orden es el siguiente: ";
     arbolAVL.nivelOrden(arbolAVL.obtenerRaiz());
     cout << endl;
+}
+
+
+ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario){
+  
+  list<int> inOrdenListBInaryTree;
+  
+  char * datosInChar;
+  if(arbolBinario.esVacio()){
+    int raiz = arbolBinario.obtenerDatoRaiz();
+    int tamanoArbol = arbolBinario.tamano();
+  
+
+    //Recorrer el arbolBinario e ingresar los datos al AVL
+    //inOrden
+
+    ArbolAVL<int> arbolAVL(raiz);
+    datosInChar = strtok (arbolBinario.inOrden(arbolBinario.obtenerRaiz())," ,.-");
+    while (datosInChar != NULL)
+    {
+      datosInChar = strtok (NULL, " ,.-");
+      inOrdenListBInaryTree.push_back(atoi(datosInChar)); 
+    }
+    
+    
+    //Incertar por izquierada hasta llegar a la raiz, luego por derecha
+    arbolAVL.insertar();
+
+
+  }
+  
+  
 }
 
