@@ -157,11 +157,11 @@ void arbolAVL(ArbolAVL<int> arbolAVL){
 ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario){
   
   list<int> inOrdenListBInaryTree;
-  
+
   char * datosInChar;
   if(arbolBinario.esVacio()){
     int raiz = arbolBinario.obtenerDatoRaiz();
-    int tamanoArbol = arbolBinario.tamano();
+    int tamanoArbol = arbolBinario.tamano(arbolBinario.obtenerRaiz());
   
 
     //Recorrer el arbolBinario e ingresar los datos al AVL
