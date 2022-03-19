@@ -6,9 +6,10 @@
 using namespace std;
 
 struct Player{
-    string name;
-    int    points;
-    bool   state;
+    
+    string name = noName;
+    int    points = 0;
+    bool   state = false;
 };
 
 

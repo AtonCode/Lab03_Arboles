@@ -155,6 +155,7 @@ void ArbolBinario<T>::inOrden(NodoBinario<T>* inicio, list<T> &lista)
         inOrden(inicio->getIzquierda(),lista);
         d = inicio->getDato();
         lista.push_back(d);
+        cout << inicio->getDato();
         inOrden(inicio->getDerecha(),lista);
     }
 

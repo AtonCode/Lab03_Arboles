@@ -10,7 +10,6 @@ class NodoAVL
 {
 protected:
     int alt;
-    NodoAVL<T>*  Padre;
     NodoAVL<T>*  der;
     NodoAVL<T>*  izq;
     T dato;
@@ -22,7 +21,6 @@ public:
     NodoAVL();
     NodoAVL(T& _dato);
     NodoAVL(T& _dato, int nalt);
-    NodoAVL<T>* getPadre();
     NodoAVL<T>* getDerecha();
     NodoAVL<T>* getIzquierda();
     ~NodoAVL();
@@ -31,11 +29,9 @@ public:
     void setDato(T& val);
     void setDerecha(NodoAVL<T>* nderecha);
     void setIzquierda(NodoAVL<T>* nizquierda);
-    void setPadre(NodoAVL<T>* npadre);
 };
 
 #include "NodoAVL.hxx"
 
 
 #endif // NODOAVL_H_INCLUDED
-
