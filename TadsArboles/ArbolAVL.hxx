@@ -164,6 +164,126 @@ void ArbolAVL<T>::nivelOrden(NodoAVL<T>* inicio)
         cola.pop();
     }
 }
+template <class T>
+int Factor_Equilibrio(NodoAVL<T>* nodo) {
+    int Valor;
+    if ((nodo -> getAltura()) == 0) {
+        Valor = 0;
+    }
+    else {
+        if (((nodo -> getIzquierda()) != nullptr) && ((nodo -> getDerecha()) == nullptr)) {
+        Valor = (nodo -> getIzquierda() -> getAltura()) + 1;
+        }
+        else if (((nodo -> getIzquierda()) == nullptr) && ((nodo -> getDerecha()) != nullptr)) {
+        Valor = -(nodo -> getDerecha() -> getAltura()) - 1;
+        }
+        else if (((nodo -> getIzquierda()) != nullptr) && ((nodo -> getDerecha()) != nullptr)) {
+        Valor = (nodo -> getIzquierda() -> getAltura()) - (nodo -> getDerecha() -> getAltura());
+        }
+    }
+    return Valor;
+}
+
+template <class T>
+void Ajustar_Balance(NodoAVL<T>* nodo) {
+    if ((Factor_Equilibrio(nodo)) >= 2) {
+        Rotacion_Derecha(nodo);
+    }
+    else if ((Factor_Equilibrio(nodo)) <= -2) {
+        Rotacion_Izquierda(nodo);
+    }
+    else {
+        if (nodo -> Padre != nullptr) {
+        Ajustar_Balance(nodo -> Padre);
+        }
+    }
+}
+template <class T>
+void Ajustar_altura(NodoAVL<T>* nodo) {
+    if ((nodo -> getDerecha() == nullptr) && (nodo -> getIzquierda() == nullptr)) {
+        nodo -> getAltura() = 0;
+    }
+    else if (nodo -> getDerecha() == nullptr) {
+        if (nodo -> getIzquierda() != nullptr) {
+            nodo -> getAltura() = (nodo -> getIzquierda() -> getAltura()) + 1;
+        }
+    }
+    else if (nodo -> getIzquierda() == nullptr) {
+        if (nodo -> getDerecha() != nullptr) {
+            nodo -> getAltura() = (nodo -> getDerecha() -> getAltura()) + 1;
+        }
+    }
+    else if ((nodo -> getDerecha() != nullptr) && (nodo -> getIzquierda() != nullptr)) {
+        if ((nodo -> getDerecha() -> getAltura()) > (nodo -> getIzquierda() -> getAltura())) {
+            nodo -> getAltura() = (nodo -> getDerecha() -> getAltura()) + 1;
+        }
+        else {
+            nodo -> getAltura() = (nodo -> getIzquierda() -> getAltura()) + 1;
+        }
+    }
+
+    if (nodo -> Padre != nullptr) {
+        Ajustar_altura(nodo -> Padre);
+    }
+}
+
+template <class T>
+void Rotacion_Derecha(NodoAVL<T>* nodo) {
+    if (nodo == Raiz) {
+        Raiz = nodo -> getIzquierda();
+        nodo -> getIzquierda() -> Padre = nullptr;
+    }
+    else if ((nodo -> Padre -> Dato) < (nodo -> Dato)) {
+        nodo -> Padre -> getDerecha() = nodo -> getIzquierda();
+        nodo -> getIzquierda() -> Padre = nodo -> Padre;
+        }
+    else if ((nodo -> Padre -> Dato) > (nodo -> Dato)) {
+        nodo -> Padre -> getIzquierda() = nodo -> getIzquierda();
+        nodo -> getIzquierda() -> Padre = nodo -> Padre;
+    }
+    if (nodo -> getIzquierda() -> getDerecha() == nullptr) {
+        nodo -> Padre = nodo -> getIzquierda();
+        nodo -> Padre -> getDerecha() = nodo;
+        nodo -> getIzquierda() = nullptr;
+    }
+    else {
+        nodo -> Padre = nodo -> getIzquierda();
+        nodo -> getIzquierda() = nodo -> getIzquierda() -> getDerecha();
+        nodo -> getIzquierda() -> Padre = nodo;
+        nodo -> Padre -> getDerecha() = nodo;
+    }
+    Ajustar_altura(nodo);
+    Ajustar_Balance(nodo);
+}
+template <class T>
+void Rotacion_Izquierda(NodoAVL<T>* nodo){
+    if (nodo == Raiz) {
+        Raiz = nodo -> getDerecha();
+        nodo -> getDerecha() -> Padre = nullptr;
+    }
+    else if ((nodo -> Padre -> Dato) < (nodo -> Dato)) {
+        nodo -> Padre -> getDerecha() = nodo -> getDerecha();
+        nodo -> getDerecha() -> Padre = nodo -> Padre;
+    }
+    else if ((nodo -> Padre -> Dato) > (nodo -> Dato)) {
+        nodo -> Padre -> getIzquierda() = nodo -> getDerecha();
+        nodo -> getDerecha() -> Padre = nodo -> Padre;
+    }
+    if (nodo -> getDerecha() -> getIzquierda() == nullptr) {
+        nodo -> Padre = nodo -> getDerecha();
+        nodo -> Padre -> getIzquierda() = nodo;
+        nodo -> getDerecha() = nullptr;
+    }
+    else {
+        nodo -> Padre = nodo -> getDerecha();
+        nodo -> getDerecha() = nodo -> getDerecha() -> getIzquierda();
+        nodo -> getDerecha() -> Padre = nodo;
+        nodo -> Padre -> getIzquierda() = nodo;      
+        }
+    Ajustar_altura(nodo);
+    Ajustar_Balance(nodo);
+}
+
 
 
 

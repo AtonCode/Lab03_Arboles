@@ -25,7 +25,7 @@ public:
     int tamano(NodoBinario<T>* inicio);
     NodoBinario<T>* obtenerRaiz();
     void fijarRaiz(NodoBinario<T>* nraiz);
-    list<T> inOrden(NodoBinario<T>* inicio);
+    void inOrden(NodoBinario<T>* inicio, list<T> &l);
     void nivelOrden(NodoBinario<T>* inicio);
     void preOrden(NodoBinario<T>* inicio);
     void posOrden(NodoBinario<T>* inicio);

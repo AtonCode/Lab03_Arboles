@@ -10,6 +10,7 @@ class NodoAVL
 {
 protected:
     int alt;
+    NodoAVL<T>*  Padre;
     NodoAVL<T>*  der;
     NodoAVL<T>*  izq;
     T dato;

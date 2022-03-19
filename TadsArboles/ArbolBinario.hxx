@@ -3,6 +3,7 @@
 #ifndef ARBOLBINARIO_HXX_INCLUDED
 #define ARBOLBINARIO_HXX_INCLUDED
 #include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -144,18 +145,19 @@ int ArbolBinario<T>::tamano(NodoBinario<T>* inicio)
 
 
 template <class T>
-list<T> ArbolBinario<T>::inOrden(NodoBinario<T>* inicio)
+void ArbolBinario<T>::inOrden(NodoBinario<T>* inicio, list<T> &lista)
 {
-    list<T> list;
+    int d;
     if(inicio == NULL)
-        return;
+        return ;
     else
     {
-        inOrden(inicio->getIzquierda());
-        list.push_back(inicio->getDato());
-        inOrden(inicio->getDerecha());
+        inOrden(inicio->getIzquierda(),lista);
+        d = inicio->getDato();
+        lista.push_back(d);
+        inOrden(inicio->getDerecha(),lista);
     }
-    return list;
+
 }
 
 
