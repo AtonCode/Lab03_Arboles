@@ -8,16 +8,65 @@ ArbolAVL<T>::ArbolAVL()
 {
 
 }
+
 template <class T>
 ArbolAVL<T>::ArbolAVL(T val)
 {
     raiz = new NodoAVL<T>(val);
 }
+
 template <class T>
 ArbolAVL<T>::~ArbolAVL()
 {
 
 }
+
+
+template <class T>
+void ArbolAVL<T>::Ajustar_Balance(NodoAVL<T>* nodo) {
+    
+    if ((Factor_Equilibrio(nodo)) >= 2) {
+        Rotacion_Derecha(nodo);
+    }
+    else if ((Factor_Equilibrio(nodo)) <= -2) {
+        Rotacion_Izquierda(nodo);
+    }
+    else {
+        if (nodo ->getPadre() != nullptr) {
+        Ajustar_Balance(nodo ->getPadre());
+        }
+    }
+}
+template <class T>
+void Ajustar_altura(NodoAVL<T>* nodo) {
+    if ((nodo -> getDerecha() == nullptr) && (nodo -> getIzquierda() == nullptr)) {
+        nodo -> setAltura(0);
+    }
+    else if (nodo -> getDerecha() == nullptr) {
+        if (nodo -> getIzquierda() != nullptr) {
+            nodo -> setAltura(nodo -> getIzquierda() -> getAltura() + 1);
+        }
+    }
+    else if (nodo -> getIzquierda() == nullptr) {
+        if (nodo -> getDerecha() != nullptr) {
+            nodo -> setAltura(nodo -> getDerecha() -> getAltura() + 1);
+        }
+    }
+    else if ((nodo -> getDerecha() != nullptr) && (nodo -> getIzquierda() != nullptr)) {
+        if ((nodo -> getDerecha() -> getAltura()) > (nodo -> getIzquierda() -> getAltura())) {
+            nodo -> setAltura(nodo -> getDerecha() -> getAltura() + 1);
+        }
+        else {
+            nodo -> setAltura(nodo -> getIzquierda() -> getAltura() + 1);
+        }
+    }
+
+    if (nodo -> getPadre() != nullptr) {
+        Ajustar_altura(nodo -> getPadre());
+    }
+}
+
+
 template <class T>
 bool ArbolAVL<T>::esVacio()
 {
@@ -25,6 +74,7 @@ bool ArbolAVL<T>::esVacio()
         return true;
     return false;
 }
+
 template <class T>
 NodoAVL<T>* ArbolAVL<T>::obtenerRaiz()
 {
@@ -43,12 +93,47 @@ T ArbolAVL<T>::obtenerDatoRaiz()
 }
 
 template<class T>
-bool ArbolAVL<T>::insertar(T _dato)
+bool ArbolAVL<T>::insertar(T Valor)
 {
-    if(raiz->insertarNodo(_dato))
-        return true;
-    else
-        return false;
+    if (raiz == nullptr) {
+        raiz = new NodoAVL<T>(Valor);
+        raiz->setDato(Valor);
+        raiz->setPadre(nullptr);
+        raiz->setAltura(0);
+      }
+      else {
+        NodoAVL<T>* Nodo_Padre = raiz;
+        NodoAVL<T>* Nuevo_Nodo = new NodoAVL<T>(Valor);
+        Nuevo_Nodo -> setDato(Valor);
+        while (Nodo_Padre != nullptr) {
+          if (Valor > Nodo_Padre -> getDato()) {
+            if (Nodo_Padre -> getDerecha() == nullptr) {
+                Nuevo_Nodo -> setAltura(0);
+                Nuevo_Nodo -> setPadre(Nodo_Padre);     
+                Nodo_Padre -> setDerecha(Nuevo_Nodo);
+                Ajustar_altura(Nodo_Padre);
+                Ajustar_Balance(Nodo_Padre);
+                break;
+            }
+            else {
+              Nodo_Padre = Nodo_Padre -> getDerecha();
+            }
+          }
+          else {
+            if (Nodo_Padre -> getIzquierda() == nullptr) {
+              Nuevo_Nodo -> setAltura(0);
+              Nuevo_Nodo -> setPadre(Nodo_Padre);
+              Nodo_Padre -> setIzquierda(Nuevo_Nodo) ;
+              Ajustar_altura(Nodo_Padre);
+              Ajustar_Balance(Nodo_Padre);
+              break;
+            }
+            else {
+              Nodo_Padre = Nodo_Padre -> getIzquierda();
+            }
+          }
+        }
+      }
 }
 
 template <class T>
@@ -185,100 +270,59 @@ int Factor_Equilibrio(NodoAVL<T>* nodo) {
 }
 
 template <class T>
-void Ajustar_Balance(NodoAVL<T>* nodo) {
-    if ((Factor_Equilibrio(nodo)) >= 2) {
-        Rotacion_Derecha(nodo);
+void ArbolAVL<T>::Rotacion_Derecha(NodoAVL<T>* nodo) {
+    
+    if (raiz == nodo) {
+        raiz = nodo -> getIzquierda();
+        nodo -> getIzquierda() -> setPadre (nullptr);
     }
-    else if ((Factor_Equilibrio(nodo)) <= -2) {
-        Rotacion_Izquierda(nodo);
-    }
-    else {
-        if (nodo -> Padre != nullptr) {
-        Ajustar_Balance(nodo -> Padre);
+    else if ((nodo ->getPadre() ->getDato()) < (nodo ->getDato())) {
+        nodo ->getPadre() -> setDerecha(nodo -> getIzquierda());
+        nodo -> getIzquierda() -> setPadre(nodo ->getPadre());
         }
-    }
-}
-template <class T>
-void Ajustar_altura(NodoAVL<T>* nodo) {
-    if ((nodo -> getDerecha() == nullptr) && (nodo -> getIzquierda() == nullptr)) {
-        nodo -> getAltura() = 0;
-    }
-    else if (nodo -> getDerecha() == nullptr) {
-        if (nodo -> getIzquierda() != nullptr) {
-            nodo -> getAltura() = (nodo -> getIzquierda() -> getAltura()) + 1;
-        }
-    }
-    else if (nodo -> getIzquierda() == nullptr) {
-        if (nodo -> getDerecha() != nullptr) {
-            nodo -> getAltura() = (nodo -> getDerecha() -> getAltura()) + 1;
-        }
-    }
-    else if ((nodo -> getDerecha() != nullptr) && (nodo -> getIzquierda() != nullptr)) {
-        if ((nodo -> getDerecha() -> getAltura()) > (nodo -> getIzquierda() -> getAltura())) {
-            nodo -> getAltura() = (nodo -> getDerecha() -> getAltura()) + 1;
-        }
-        else {
-            nodo -> getAltura() = (nodo -> getIzquierda() -> getAltura()) + 1;
-        }
-    }
-
-    if (nodo -> Padre != nullptr) {
-        Ajustar_altura(nodo -> Padre);
-    }
-}
-
-template <class T>
-void Rotacion_Derecha(NodoAVL<T>* nodo) {
-    if (nodo == Raiz) {
-        Raiz = nodo -> getIzquierda();
-        nodo -> getIzquierda() -> Padre = nullptr;
-    }
-    else if ((nodo -> Padre -> Dato) < (nodo -> Dato)) {
-        nodo -> Padre -> getDerecha() = nodo -> getIzquierda();
-        nodo -> getIzquierda() -> Padre = nodo -> Padre;
-        }
-    else if ((nodo -> Padre -> Dato) > (nodo -> Dato)) {
-        nodo -> Padre -> getIzquierda() = nodo -> getIzquierda();
-        nodo -> getIzquierda() -> Padre = nodo -> Padre;
+    else if ((nodo ->getPadre() ->getDato()) > (nodo ->getDato())) {
+        nodo ->getPadre() -> setIzquierda(nodo -> getIzquierda());
+        nodo -> getIzquierda() ->setPadre(nodo ->getPadre());
     }
     if (nodo -> getIzquierda() -> getDerecha() == nullptr) {
-        nodo -> Padre = nodo -> getIzquierda();
-        nodo -> Padre -> getDerecha() = nodo;
-        nodo -> getIzquierda() = nullptr;
+        nodo ->setPadre(nodo -> getIzquierda());
+        nodo ->getPadre() -> setDerecha(nodo);
+        nodo -> setIzquierda(nullptr);
     }
     else {
-        nodo -> Padre = nodo -> getIzquierda();
-        nodo -> getIzquierda() = nodo -> getIzquierda() -> getDerecha();
-        nodo -> getIzquierda() -> Padre = nodo;
-        nodo -> Padre -> getDerecha() = nodo;
+        nodo ->setPadre(nodo -> getIzquierda());
+        nodo -> setIzquierda(nodo -> getIzquierda() -> getDerecha());
+        nodo -> getIzquierda() ->setPadre( nodo);
+        nodo ->getPadre() -> setDerecha( nodo);
     }
     Ajustar_altura(nodo);
     Ajustar_Balance(nodo);
 }
+
 template <class T>
-void Rotacion_Izquierda(NodoAVL<T>* nodo){
-    if (nodo == Raiz) {
-        Raiz = nodo -> getDerecha();
-        nodo -> getDerecha() -> Padre = nullptr;
+void ArbolAVL<T>::Rotacion_Izquierda(NodoAVL<T>* nodo){
+    if (nodo == raiz) {
+        raiz = nodo -> getDerecha();
+        nodo -> getDerecha() ->setPadre(nullptr);
     }
-    else if ((nodo -> Padre -> Dato) < (nodo -> Dato)) {
-        nodo -> Padre -> getDerecha() = nodo -> getDerecha();
-        nodo -> getDerecha() -> Padre = nodo -> Padre;
+    else if ((nodo ->getPadre() ->getDato()) < (nodo ->getDato())) {
+        nodo ->getPadre() -> setDerecha(nodo -> getDerecha());
+        nodo -> getDerecha() ->setPadre( nodo ->getPadre());
     }
-    else if ((nodo -> Padre -> Dato) > (nodo -> Dato)) {
-        nodo -> Padre -> getIzquierda() = nodo -> getDerecha();
-        nodo -> getDerecha() -> Padre = nodo -> Padre;
+    else if ((nodo ->getPadre() ->getDato()) > (nodo ->getDato())) {
+        nodo ->getPadre() -> setIzquierda(nodo -> getDerecha());
+        nodo -> getDerecha() ->setPadre(nodo ->getPadre());
     }
     if (nodo -> getDerecha() -> getIzquierda() == nullptr) {
-        nodo -> Padre = nodo -> getDerecha();
-        nodo -> Padre -> getIzquierda() = nodo;
-        nodo -> getDerecha() = nullptr;
+        nodo ->setPadre(nodo -> getDerecha());
+        nodo ->getPadre() -> setIzquierda(nodo);
+        nodo -> setDerecha(nullptr);
     }
     else {
-        nodo -> Padre = nodo -> getDerecha();
-        nodo -> getDerecha() = nodo -> getDerecha() -> getIzquierda();
-        nodo -> getDerecha() -> Padre = nodo;
-        nodo -> Padre -> getIzquierda() = nodo;      
+        nodo -> setPadre(nodo -> getDerecha());
+        nodo -> setDerecha(nodo -> getDerecha() -> getIzquierda());
+        nodo -> getDerecha() ->setPadre(nodo);
+        nodo -> getPadre() -> setIzquierda(nodo);      
         }
     Ajustar_altura(nodo);
     Ajustar_Balance(nodo);
