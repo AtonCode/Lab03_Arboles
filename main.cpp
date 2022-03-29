@@ -2,7 +2,6 @@
 //alias pull="git pull"
 // alias run="g++ -std=c++11 main.cpp && ./a.out"
 
-#include <stdio.h>
 #include <iostream>
 #include <iterator>
 #include "TadsArboles/ArbolBinario.h"
@@ -16,6 +15,7 @@ void creadorArbolBinario(ArbolBinario<int> arbolBinario, int padre, int hijo);
 void arbolOrdenado(ArbolBinarioOrd<int> arbolBinarioOrdenado);
 void arbolAVL(ArbolAVL<int> arbolAVL);
 ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario);
+void printArbolBinario(ArbolBinario<int> arbolBinario);
 
 /**
  1.	Cree un Programa que convierta 5 árboles binarios básicos en arboles AVL 
@@ -25,7 +25,7 @@ ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario);
 
 int main(){
 
-  //system("clear");
+  system("clear");
 
 // Crenado Arboles Binarios
   ArbolBinario<int> arbolBinarioUNO(1);
@@ -34,26 +34,61 @@ int main(){
   ArbolBinario<int> arbolBinarioCUATRO(15);
   ArbolBinario<int> arbolBinarioCINCO(20);
 
+//Cargando Arbol Binario
   creadorArbolBinario(arbolBinarioUNO, 1, 2);
-  //creadorArbolBinario(arbolBinarioDOS, 6, 7);
-  //creadorArbolBinario(arbolBinarioTRES, 10, 11);
-  //creadorArbolBinario(arbolBinarioCUATRO, 15, 16);
-  //creadorArbolBinario(arbolBinarioCINCO, 20, 21);
-
+  creadorArbolBinario(arbolBinarioDOS, 6, 7);
+  creadorArbolBinario(arbolBinarioTRES, 10, 11);
+  creadorArbolBinario(arbolBinarioCUATRO, 15, 16);
+  creadorArbolBinario(arbolBinarioCINCO, 20, 21);
+  
 //Convietiendo arboleBinarios a AVL
   ArbolAVL<int> arbolAVLuno = convertirArbolBinarioToArbolAVL(arbolBinarioUNO);
-  //ArbolAVL<int> arbolAVLdos = convertirArbolBinarioToArbolAVL(arbolBinarioDOS);
-  //ArbolAVL<int> arbolAVLtres = convertirArbolBinarioToArbolAVL(arbolBinarioTRES);
-  //ArbolAVL<int> arbolAVcuatro = convertirArbolBinarioToArbolAVL(arbolBinarioCUATRO);
-  //ArbolAVL<int> arbolAVcinco = convertirArbolBinarioToArbolAVL(arbolBinarioCINCO);
+  ArbolAVL<int> arbolAVLdos = convertirArbolBinarioToArbolAVL(arbolBinarioDOS);
+  ArbolAVL<int> arbolAVLtres = convertirArbolBinarioToArbolAVL(arbolBinarioTRES);
+  ArbolAVL<int> arbolAVcuatro = convertirArbolBinarioToArbolAVL(arbolBinarioCUATRO);
+  ArbolAVL<int> arbolAVcinco = convertirArbolBinarioToArbolAVL(arbolBinarioCINCO);
   
 
-//iMPRIMIR binario y avl
-  //arbolBinario(arbolBinarioUNO);
+//Imprimir Arboles
+  cout <<"Arbol Binario 1"<< endl;
+  printArbolBinario(arbolBinarioUNO);
   cout << endl;
+  cout <<"Arbol AVL 1"<< endl;
   arbolAVL(arbolAVLuno);
   cout << endl;
+
+  cout <<"Arbol Binario 2"<< endl;
+  printArbolBinario(arbolBinarioDOS);
   cout << endl;
+  cout <<"Arbol AVL 2"<< endl;
+  arbolAVL(arbolAVLdos);
+  cout << endl;
+
+  cout <<"Arbol Binario 3"<< endl;
+  printArbolBinario(arbolBinarioTRES);
+  cout << endl;
+  cout <<"Arbol AVL 3"<< endl;
+  arbolAVL(arbolAVLtres);
+  cout << endl;
+
+  cout <<"Arbol Binario 4"<< endl;
+  printArbolBinario(arbolBinarioCUATRO);
+  cout << endl;
+  cout <<"Arbol AVL 4"<< endl;
+  arbolAVL(arbolAVcuatro);
+  cout << endl;
+
+  cout <<"Arbol Binario 5"<< endl;
+  printArbolBinario(arbolBinarioCINCO);
+  cout << endl;
+  cout <<"Arbol AVL 5"<< endl;
+  arbolAVL(arbolAVcinco);
+  cout << endl;
+
+  cout <<"FIN..."<< endl;
+  
+ 
+  
     
     return 0;
 }
@@ -62,53 +97,36 @@ int main(){
 void creadorArbolBinario(ArbolBinario<int> arbolBinario, int padre, int hijo){
 
   if(arbolBinario.insertar(padre,hijo)){
-    cout << "Se inserto el nodo correctamente" << endl;
+    
   }
   else{
     cout << "No se inserto el nodo" << endl;
   }
   if(arbolBinario.insertar(hijo,hijo+1)){
-    cout << "Se inserto el nodo correctamente" << endl;
+    
   }
   else{
     cout << "No se inserto el nodo" << endl;
   }
   if(arbolBinario.insertar(hijo,hijo+2)){
-    cout << "Se inserto el nodo correctamente" << endl;
+    
   }
   else{
     cout << "No se inserto el nodo" << endl;
   }
   if(arbolBinario.insertar(hijo+1,hijo+5)){
-    cout << "Se inserto el nodo correctamente" << endl;
+    
   }
   else{
     cout << "No se inserto el nodo" << endl;
   }
   if(arbolBinario.insertar(hijo+1,hijo+6)){
-    cout << "Se inserto el nodo correctamente" << endl;
+    
   }
   else{
     cout << "No se inserto el nodo" << endl;
   }
         
-    cout << "Raiz del arbolBinario: " << arbolBinario.obtenerDatoRaiz() << endl;
-    cout << "La altura del arbolBinario es: " << arbolBinario.altura() << endl;
-    cout << "El tamanio del arbolBinario es: " << arbolBinario.tamano(arbolBinario.obtenerRaiz()) << endl;
-  
-    cout << "El arbolBinario por pre-orden es el siguiente: ";
-    arbolBinario.preOrden(arbolBinario.obtenerRaiz());
-    cout << endl;
-    cout << "El arbolBinario por in-orden es el siguiente: ";
-    list<int> l;
-    arbolBinario.inOrden(arbolBinario.obtenerRaiz(),l);
-    cout << endl;
-    cout << "El arbolBinario por pos-orden es el siguiente: ";
-    arbolBinario.posOrden(arbolBinario.obtenerRaiz());
-    cout << endl;
-    cout << "El arbolBinario por nivel-orden es el siguiente: ";
-    arbolBinario.nivelOrden(arbolBinario.obtenerRaiz());
-    cout << endl;
 }
 
 void arbolOrdenado( ArbolBinarioOrd<int> arbolBinarioOrdenado){
@@ -143,37 +161,48 @@ void arbolOrdenado( ArbolBinarioOrd<int> arbolBinarioOrdenado){
     arbolBinarioOrdenado.nivelOrden(arbolBinarioOrdenado.obtenerRaiz());
     cout << endl;
 }
+void printArbolBinario(ArbolBinario<int> arbolBinario){
+
+    cout << "Raiz del arbolBinario: " << arbolBinario.obtenerDatoRaiz() << endl;
+    cout << "La altura del arbolBinario es: " << arbolBinario.altura() << endl;
+    cout << "El tamanio del arbolBinario es: " << arbolBinario.tamano(arbolBinario.obtenerRaiz()) << endl;
+  
+    cout << "El arbolBinario por pre-orden es el siguiente: ";
+    arbolBinario.preOrden(arbolBinario.obtenerRaiz());
+    cout << endl;
+    cout << "El arbolBinario por in-orden es el siguiente: ";
+    list<int> l;
+    arbolBinario.inOrden(arbolBinario.obtenerRaiz(), l);
+    for(auto it = l.begin(); it != l.end(); it++){
+      cout<<(*it)<<" ";
+    }
+    arbolBinario.inOrden(arbolBinario.obtenerRaiz(),l);
+    cout << endl;
+    cout << "El arbolBinario por pos-orden es el siguiente: ";
+    arbolBinario.posOrden(arbolBinario.obtenerRaiz());
+    cout << endl;
+    cout << "El arbolBinario por nivel-orden es el siguiente: ";
+    arbolBinario.nivelOrden(arbolBinario.obtenerRaiz());
+    cout << endl;
+}
 
 void arbolAVL(ArbolAVL<int> arbolAVL){
-  /*
-  if(arbolAVL.insertar(9)){
-    cout << "Se inserto el nodo correctamente" << endl;
-  }
-  else{
-    cout << "No se inserto el nodo" << endl;
-  }
-  if(arbolAVL.insertar(5)){
-    cout << "Se inserto el nodo correctamente" << endl;
-  }
-  else{
-    cout << "No se inserto el nodo" << endl;
-  }
-  */    
-    cout << "Raiz del ArbolAVL: " << arbolAVL.obtenerDatoRaiz() << endl;
+  
+    cout << "Raiz del ArbolAVL: " << arbolAVL.datoRaiz() << endl;
     cout << "La altura del ArbolAVL es: " << arbolAVL.altura() << endl;
-    cout << "El tamanio del ArbolAVL es: " << arbolAVL.tamano(arbolAVL.obtenerRaiz()) << endl;
+    cout << "El tamanio del ArbolAVL es: " << arbolAVL.tamano() << endl;
   
     cout << "El ArbolAVL por pre-orden es el siguiente: ";
-    arbolAVL.preOrden(arbolAVL.obtenerRaiz());
+    arbolAVL.preOrden();
     cout << endl;
     cout << "El ArbolAVL por in-orden es el siguiente: ";
-    arbolAVL.inOrden(arbolAVL.obtenerRaiz());
+    arbolAVL.inOrden();
     cout << endl;
     cout << "El ArbolAVL por pos-orden es el siguiente: ";
-    arbolAVL.posOrden(arbolAVL.obtenerRaiz());
+    arbolAVL.posOrden();
     cout << endl;
     cout << "El ArbolAVL por nivel-orden es el siguiente: ";
-    arbolAVL.nivelOrden(arbolAVL.obtenerRaiz());
+    arbolAVL.nivelOrden();
     cout << endl;
 }
 
@@ -181,7 +210,7 @@ void arbolAVL(ArbolAVL<int> arbolAVL){
 ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario){
   list<int> inOrdenListBInaryTree;
   int raiz = arbolBinario.obtenerDatoRaiz();
-  ArbolAVL<int> arbolAVL(raiz);
+  ArbolAVL<int> arbolAVL;
   int counter = 0;
   int tamanoArbol = arbolBinario.tamano(arbolBinario.obtenerRaiz());
     
@@ -189,32 +218,14 @@ ArbolAVL<int> convertirArbolBinarioToArbolAVL(ArbolBinario<int> arbolBinario){
   
     //Recorrer el arbolBinarion inOrden e ingresar los datos al AVL
     arbolBinario.inOrden(arbolBinario.obtenerRaiz(), inOrdenListBInaryTree);
-    list<int> ::iterator it;
     
-    cout<<"tamano: "<<inOrdenListBInaryTree.size()<<endl;
+    inOrdenListBInaryTree.size();
 
-    for(it = inOrdenListBInaryTree.begin(); it != inOrdenListBInaryTree.end(); it++){
-      cout<<*it<<endl;
-      arbolAVL.insertar(*it);
+    for(auto it = inOrdenListBInaryTree.begin(); it != inOrdenListBInaryTree.end(); it++){
+      //cout<<*it<<endl;
+      arbolAVL.insert(*it);
     }
-    //Insertar por izquierada hasta llegar a la raiz, luego por derecha
-    /*
-    for (auto it = inOrdenListBInaryTree.begin(); it != inOrdenListBInaryTree.end(); ++it){
-       //Por Izquierda
-        if(inOrdenListBInaryTree.pop_front() != raiz){
-            if(arbolAVL.insertar(inOrdenListBInaryTree.pop_front()))
-              counter++;
-        } 
-        //Por derecha
-        else{
-          if(arbolAVL.insertar(inOrdenListBInaryTree.pop_front()))
-              counter++;//Ignorar Raiz
-          if(arbolAVL.insertar(inOrdenListBInaryTree.pop_front()))
-              counter++;
-        }
-        
-    }
-    */
+    
   }
   return arbolAVL;
 }

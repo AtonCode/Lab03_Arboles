@@ -1,37 +1,26 @@
-//Nodo AVL.h
+#ifndef __NODOAVL__H__
+#define __NODOAVL__H__
 
-#ifndef NODOAVL_H_INCLUDED
-#define NODOAVL_H_INCLUDED
-
+#include <iostream>
 using namespace std;
 
 template< class T >
 class NodoAVL
 {
 protected:
-    int alt;
-    NodoAVL<T>*  der;
-    NodoAVL<T>*  izq;
     T dato;
+    NodoAVL<T> *Izq;
+    NodoAVL<T> *Dere;
 public:
-    bool buscar(T& n);
-    bool eliminarNodo(T _dato);
-    bool insertarNodo(T _dato);
-    int getAltura();
+    NodoAVL(T dato);
     NodoAVL();
-    NodoAVL(T& _dato);
-    NodoAVL(T& _dato, int nalt);
-    NodoAVL<T>* getDerecha();
-    NodoAVL<T>* getIzquierda();
-    ~NodoAVL();
-    T getDato();
-    void setAltura(int val);
-    void setDato(T& val);
-    void setDerecha(NodoAVL<T>* nderecha);
-    void setIzquierda(NodoAVL<T>* nizquierda);
+    T obtenerDato();
+    void fijarDato(T& val);
+    NodoAVL<T>* obtenerHijoIzq();
+    NodoAVL<T>* obtenerHijoDer();
+    void fijarHijoIzq(NodoAVL<T> *izq);
+    void fijarHijoDer(NodoAVL<T> *der);
 };
 
 #include "NodoAVL.hxx"
-
-
-#endif // NODOAVL_H_INCLUDED
+#endif

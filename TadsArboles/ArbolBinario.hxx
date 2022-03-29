@@ -155,7 +155,7 @@ void ArbolBinario<T>::inOrden(NodoBinario<T>* inicio, list<T> &lista)
         inOrden(inicio->getIzquierda(),lista);
         d = inicio->getDato();
         lista.push_back(d);
-        cout << inicio->getDato();
+        //cout << inicio->getDato();
         inOrden(inicio->getDerecha(),lista);
     }
 
@@ -167,7 +167,7 @@ void ArbolBinario<T>::preOrden(NodoBinario<T>* inicio)
 {
     if(inicio != NULL)
     {
-        cout << inicio->getDato();
+        cout << inicio->getDato()<<" ";
         preOrden(inicio->getIzquierda());
         preOrden(inicio->getDerecha());
     }
@@ -183,7 +183,7 @@ void ArbolBinario<T>::posOrden(NodoBinario<T>* inicio)
     {
         posOrden(inicio->getIzquierda());
         posOrden(inicio->getDerecha());
-        cout << inicio->getDato();
+        cout << inicio->getDato()<< " ";
     }
 }
 
@@ -195,7 +195,7 @@ void ArbolBinario<T>::nivelOrden(NodoBinario<T>* inicio)
     cola.push(inicio);
     while(!cola.empty())
     {
-        cout << cola.front()->getDato();
+        cout << cola.front()->getDato() << " ";
         if(cola.front()->getIzquierda() != NULL)
             cola.push(cola.front()->getIzquierda());
         if(cola.front()->getDerecha() != NULL)
